@@ -5,6 +5,7 @@ A professional coding academy landing page with an interactive coding simulator.
 ## Deployment to GitHub Pages with Custom Domain
 
 ### 1. Setup GitHub Repository
+genesisitacademy
 1. Create a new repository on GitHub.
 2. Push this code to the `main` branch.
 
