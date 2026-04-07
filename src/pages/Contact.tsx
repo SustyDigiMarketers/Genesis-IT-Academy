@@ -51,7 +51,7 @@ export default function Contact() {
               <h2 className="text-2xl sm:text-3xl font-bold text-google-dark">Contact Information</h2>
               <div className="space-y-6 sm:space-y-8">
                 {[
-                  { icon: <Mail size={24} />, title: "Email Us", detail: "admissions@devacademy.com", sub: "Response within 24 hours", color: "text-google-blue bg-blue-50" },
+                  { icon: <Mail size={24} />, title: "Email Us", detail: "admissions@genesisitacademy.com", sub: "Response within 24 hours", color: "text-google-blue bg-blue-50" },
                   { icon: <Phone size={24} />, title: "Call Us", detail: "+91 98765 43210", sub: "Mon-Sat, 9am - 7pm", color: "text-google-green bg-green-50" },
                   { icon: <MapPin size={24} />, title: "Visit Us", detail: "123 Tech Park Road, Trichy", sub: "Tamil Nadu, India", color: "text-google-red bg-red-50" }
                 ].map((item, i) => (

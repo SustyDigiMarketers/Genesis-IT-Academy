@@ -27,10 +27,12 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const isCodingTest = location.pathname === '/coding-test';
+
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-      scrolled ? "bg-white/90 backdrop-blur-xl shadow-lg py-2" : "bg-transparent py-4"
+      scrolled || isCodingTest ? "bg-white/90 backdrop-blur-xl shadow-lg py-2" : "bg-transparent py-4"
     )}>
       <motion.div 
         className="absolute top-0 left-0 right-0 h-1 bg-google-blue origin-left z-50"
@@ -48,7 +50,7 @@ const Navbar = () => {
               <Code2 className="text-white w-5 h-5 sm:w-6 sm:h-6" />
             </motion.div>
             <span className="text-xl sm:text-2xl font-black tracking-tighter text-google-dark group-hover:text-google-blue transition-colors">
-              DEV<span className="text-google-blue">ACADEMY</span>
+              GENESIS<span className="text-google-blue">IT</span>ACADEMY
             </span>
           </Link>
 
@@ -161,7 +163,7 @@ const Footer = () => {
               <div className="bg-google-blue p-2 rounded-xl">
                 <Code2 className="text-white w-6 h-6" />
               </div>
-              <span className="text-2xl font-black tracking-tighter">DEV<span className="text-google-blue">ACADEMY</span></span>
+              <span className="text-2xl font-black tracking-tighter">GENESIS<span className="text-google-blue">IT</span>ACADEMY</span>
             </Link>
             <p className="text-gray-400 text-lg leading-relaxed font-medium">
               Empowering the next generation of developers through hands-on mentorship and industry-standard projects.
@@ -233,7 +235,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Email</p>
-                  <p className="text-sm font-bold">hello@devacademy.com</p>
+                  <p className="text-sm font-bold">hello@genesisitacademy.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 group">
@@ -251,7 +253,7 @@ const Footer = () => {
         
         <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-gray-500 text-sm font-medium">
-            © 2026 DevAcademy. Built with passion for the next generation.
+            © 2026 GenesisITAcademy. Built with passion for the next generation.
           </div>
           <div className="flex items-center gap-8">
             <div className="flex gap-6 text-sm font-bold text-gray-400">
