@@ -13,9 +13,9 @@ import { PROBLEMS } from '../data/problems';
 import { checkAnswer } from '../data/answers';
 
 const difficultyConfig = {
-  Beginner:     { color: 'text-google-green',  bg: 'bg-google-green/15',  border: 'border-google-green/30'  },
-  Intermediate: { color: 'text-google-yellow', bg: 'bg-google-yellow/15', border: 'border-google-yellow/30' },
-  Advanced:     { color: 'text-google-red',    bg: 'bg-google-red/15',    border: 'border-google-red/30'    },
+  Beginner:     { color: 'text-emerald-500',  bg: 'bg-emerald-500/15',  border: 'border-emerald-500/30'  },
+  Intermediate: { color: 'text-amber-500', bg: 'bg-amber-500/15', border: 'border-amber-500/30' },
+  Advanced:     { color: 'text-rose-500',    bg: 'bg-rose-500/15',    border: 'border-rose-500/30'    },
 };
 
 // Pick one random problem for this session (stable for the lifetime of the page load)
@@ -129,19 +129,21 @@ export default function CodingTest() {
   const dc = difficultyConfig[assignedProblem.difficulty];
 
   return (
-    <div className="h-screen flex flex-col bg-[#0f172a] text-white overflow-hidden pt-32">
-
+    <div className="h-screen flex flex-col bg-[#060B14] text-white overflow-hidden pt-32 relative">
+      {/* Dynamic Background FX */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} className="absolute top-0 left-1/4 w-[40rem] h-[40rem] bg-brand-blue/20 rounded-full blur-[120px]" />
+        <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 12, repeat: Infinity, delay: 1, ease: 'easeInOut' }} className="absolute bottom-0 right-1/4 w-[50rem] h-[50rem] bg-cyan-700/20 rounded-full blur-[150px]" />
+      </div>
 
       {/* ── Body ─────────────────────────────────────────────────────────── */}
-      <div className="flex-1 flex overflow-hidden relative">
-
-
+      <div className="flex-1 flex overflow-hidden relative z-10 px-4 pb-4">
 
         {/* ── CENTRE: Editor ─────────────────────────────────────────────── */}
-        <div className="flex-1 flex flex-col bg-[#1e1e1e] overflow-hidden min-w-0">
+        <div className="flex-1 flex flex-col bg-[#080d1a]/80 backdrop-blur-xl overflow-hidden min-w-0 border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,180,216,0.05)] mx-2">
 
           {/* Problem header */}
-          <div className="px-4 md:px-6 py-4 border-b border-white/5 bg-[#1a1a2e] shrink-0">
+          <div className="px-4 md:px-6 py-4 border-b border-brand-blue/20 bg-gradient-to-r from-brand-blue/10 to-transparent shrink-0">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -157,7 +159,7 @@ export default function CodingTest() {
                     </span>
                   ))}
                   {solved ? (
-                    <span className="text-[9px] font-black text-google-green bg-google-green/10 border border-google-green/30 px-2.5 py-1 rounded-full flex items-center gap-1">
+                    <span className="text-[9px] font-black text-emerald-500 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-full flex items-center gap-1">
                       <CheckCircle2 size={9} /> SOLVED
                     </span>
                   ) : (
@@ -165,7 +167,7 @@ export default function CodingTest() {
                       <Target size={9} /> PENDING
                     </span>
                   )}
-                  <span className="text-[9px] font-bold bg-google-blue/10 text-google-blue px-2.5 py-1 rounded-full border border-google-blue/20 flex items-center gap-1 text-center shrink-0">
+                  <span className="text-[9px] font-bold bg-brand-blue/10 text-brand-blue px-2.5 py-1 rounded-full border border-brand-blue/20 flex items-center gap-1 text-center shrink-0">
                     <Shuffle size={9} /> RANDOM CHALLENGE
                   </span>
                 </div>
@@ -178,7 +180,7 @@ export default function CodingTest() {
                 {/* Timer */}
                 <div className={cn(
                   'flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold border',
-                  timerActive ? 'bg-google-blue/10 border-google-blue/30 text-google-blue' : 'bg-white/5 border-white/10 text-gray-400'
+                  timerActive ? 'bg-brand-blue/10 border-brand-blue/30 text-brand-blue' : 'bg-white/5 border-white/10 text-gray-400'
                 )}>
                   <Clock size={13} />
                   <span className="font-mono">{formatTime(seconds)}</span>
@@ -193,7 +195,7 @@ export default function CodingTest() {
                       disabled={solved}
                       className={cn(
                         'px-3 py-1.5 rounded-lg text-[10px] md:text-xs font-bold transition-all',
-                        language === lang ? 'bg-google-blue text-white shadow' : 'text-gray-400 hover:text-white',
+                        language === lang ? 'bg-brand-blue text-white shadow' : 'text-gray-400 hover:text-white',
                         solved && 'opacity-50 cursor-not-allowed'
                       )}
                     >
@@ -208,8 +210,8 @@ export default function CodingTest() {
                   className={cn(
                     'flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold border transition-all shrink-0',
                     showHints
-                      ? 'bg-google-yellow/15 border-google-yellow/30 text-google-yellow'
-                      : 'bg-white/5 border-white/10 text-gray-400 hover:text-google-yellow hover:border-google-yellow/30'
+                      ? 'bg-amber-500/15 border-amber-500/30 text-amber-500'
+                      : 'bg-white/5 border-white/10 text-gray-400 hover:text-amber-500 hover:border-amber-500/30'
                   )}
                 >
                   <Lightbulb size={13} /> Hints
@@ -235,7 +237,7 @@ export default function CodingTest() {
               {assignedProblem.examples.map((ex, i) => (
                 <div key={i} className="text-[10px] bg-white/4 border border-white/8 rounded-lg px-3 py-2 font-mono text-gray-400 leading-relaxed">
                   <span className="text-gray-600 font-bold">Input:</span> {ex.input}&nbsp;&nbsp;
-                  <span className="text-gray-600 font-bold">Output:</span> <span className="text-google-green">{ex.output}</span>
+                  <span className="text-gray-600 font-bold">Output:</span> <span className="text-emerald-500">{ex.output}</span>
                 </div>
               ))}
             </div>
@@ -249,15 +251,15 @@ export default function CodingTest() {
                   exit={{ opacity: 0, height: 0 }}
                   className="overflow-hidden"
                 >
-                  <div className="mt-3 p-3 bg-google-yellow/5 border border-google-yellow/20 rounded-xl">
+                  <div className="mt-3 p-3 bg-amber-500/5 border border-amber-500/20 rounded-xl">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-google-yellow flex items-center gap-1.5">
+                      <span className="text-[9px] font-black uppercase tracking-widest text-amber-500 flex items-center gap-1.5">
                         <Lightbulb size={10} /> Hints ({hintsRevealed}/{assignedProblem.hints.length} revealed)
                       </span>
                       {hintsRevealed < assignedProblem.hints.length && (
                         <button
                           onClick={() => setHintsRevealed(h => Math.min(h + 1, assignedProblem.hints.length))}
-                          className="text-[9px] font-bold text-google-yellow hover:underline"
+                          className="text-[9px] font-bold text-amber-500 hover:underline"
                         >
                           Reveal next →
                         </button>
@@ -271,7 +273,7 @@ export default function CodingTest() {
                           animate={{ opacity: 1, x: 0 }}
                           className="text-[11px] text-gray-300 flex items-start gap-2"
                         >
-                          <span className="text-google-yellow font-bold mt-0.5">{i + 1}.</span> {hint}
+                          <span className="text-amber-500 font-bold mt-0.5">{i + 1}.</span> {hint}
                         </motion.p>
                       ))}
                       {hintsRevealed === 0 && (
@@ -288,10 +290,10 @@ export default function CodingTest() {
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-3 p-3 bg-google-green/10 border border-google-green/30 rounded-xl flex items-center gap-3"
+                className="mt-3 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center gap-3"
               >
-                <PartyPopper size={16} className="text-google-green shrink-0" />
-                <p className="text-xs text-google-green font-bold">
+                <PartyPopper size={16} className="text-emerald-500 shrink-0" />
+                <p className="text-xs text-emerald-500 font-bold">
                   Challenge complete! You solved it in {formatTime(seconds)}. Reload the page to get a new random challenge.
                 </p>
               </motion.div>
@@ -299,9 +301,9 @@ export default function CodingTest() {
           </div>
 
           {/* Editor */}
-          <div className="flex-1 relative min-h-0">
+          <div className="flex-1 relative min-h-0 bg-[#060b13]/60 backdrop-blur-sm">
             {/* Editor top bar */}
-            <div className="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-white/5">
+            <div className="flex items-center justify-between px-4 py-2 bg-[#020509]/80 border-b border-white/5">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
                 <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
@@ -311,7 +313,7 @@ export default function CodingTest() {
                 </span>
               </div>
               <div className="flex items-center gap-3 text-[9px] text-gray-600 font-bold">
-                <span className="flex items-center gap-1"><Zap size={10} className="text-google-yellow" /> Monaco Editor</span>
+                <span className="flex items-center gap-1"><Zap size={10} className="text-amber-500" /> Monaco Editor</span>
                 <span>{language === 'javascript' ? 'JavaScript' : 'Python'}</span>
               </div>
             </div>
@@ -320,8 +322,8 @@ export default function CodingTest() {
             {solved && (
               <div className="absolute inset-0 z-10 bg-[#0f1a2e]/60 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
                 <div className="text-center">
-                  <CheckCircle2 size={48} className="text-google-green mx-auto mb-3 opacity-80" />
-                  <p className="text-google-green font-black text-lg opacity-80">Challenge Complete!</p>
+                  <CheckCircle2 size={48} className="text-emerald-500 mx-auto mb-3 opacity-80" />
+                  <p className="text-emerald-500 font-black text-lg opacity-80">Challenge Complete!</p>
                 </div>
               </div>
             )}
@@ -354,11 +356,14 @@ export default function CodingTest() {
         <motion.div
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="w-full md:w-[380px] bg-[#0f172a] border-l border-white/10 flex flex-col shrink-0 hidden md:flex"
+          className="w-full md:w-[380px] bg-[#0A111F]/80 backdrop-blur-md border border-brand-blue/20 flex flex-col shrink-0 hidden md:flex rounded-2xl shadow-[-20px_0_50px_rgba(0,0,0,0.2)] ml-2 relative overflow-hidden"
         >
+          {/* Inner Glow */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/20 blur-[60px]" />
+          
           {/* Panel header */}
-          <div className="flex border-b border-white/10 shrink-0">
-            <div className="flex-1 py-3 text-[10px] font-black uppercase tracking-widest text-google-blue border-b-2 border-google-blue bg-google-blue/5 flex items-center justify-center gap-2">
+          <div className="flex border-b border-white/10 shrink-0 relative z-10">
+            <div className="flex-1 py-3 text-[10px] font-black uppercase tracking-widest text-brand-blue border-b-2 border-brand-blue bg-brand-blue/5 flex items-center justify-center gap-2">
               <Terminal size={11} /> Console
             </div>
           </div>
@@ -370,15 +375,15 @@ export default function CodingTest() {
               <div className="flex gap-3">
                 <div className="flex-1 bg-white/4 border border-white/8 rounded-xl p-3 text-center">
                   <p className="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Time</p>
-                  <p className="text-sm font-black text-google-green font-mono">{output.time}</p>
+                  <p className="text-sm font-black text-emerald-500 font-mono">{output.time}</p>
                 </div>
                 <div className="flex-1 bg-white/4 border border-white/8 rounded-xl p-3 text-center">
                   <p className="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Memory</p>
-                  <p className="text-sm font-black text-google-blue font-mono">{output.memory}</p>
+                  <p className="text-sm font-black text-brand-blue font-mono">{output.memory}</p>
                 </div>
                 <div className="flex-1 bg-white/4 border border-white/8 rounded-xl p-3 text-center">
                   <p className="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Points</p>
-                  <p className={cn('text-sm font-black font-mono', solved ? 'text-google-yellow' : 'text-gray-600')}>
+                  <p className={cn('text-sm font-black font-mono', solved ? 'text-amber-500' : 'text-gray-600')}>
                     {solved ? '100' : '0'}
                   </p>
                 </div>
@@ -388,14 +393,14 @@ export default function CodingTest() {
             {/* Console */}
             <div className="flex-1 bg-[#0d1117] border border-white/8 rounded-xl p-4 font-mono text-xs overflow-y-auto custom-scrollbar">
               {isRunning ? (
-                <div className="h-full flex flex-col items-center justify-center gap-3 text-google-blue">
+                <div className="h-full flex flex-col items-center justify-center gap-3 text-brand-blue">
                   <RotateCcw className="animate-spin w-7 h-7" />
                   <span className="font-black tracking-widest animate-pulse">EXECUTING…</span>
                   <div className="flex gap-1 mt-2">
                     {[0, 1, 2].map(i => (
                       <motion.div
                         key={i}
-                        className="w-2 h-2 bg-google-blue rounded-full"
+                        className="w-2 h-2 bg-brand-blue rounded-full"
                         animate={{ y: [-4, 4, -4] }}
                         transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
                       />
@@ -406,7 +411,7 @@ export default function CodingTest() {
                 <motion.pre
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className={cn('whitespace-pre-wrap leading-loose text-[11px]', result?.success ? 'text-google-green' : 'text-google-red')}
+                  className={cn('whitespace-pre-wrap leading-loose text-[11px]', result?.success ? 'text-emerald-500' : 'text-rose-500')}
                 >
                   {output.stdout}
                 </motion.pre>
@@ -416,7 +421,7 @@ export default function CodingTest() {
                     <Play className="w-7 h-7 text-gray-600" />
                   </div>
                   <p className="text-gray-600 text-[11px] leading-relaxed">
-                    Write your code and click <span className="text-google-blue font-bold">Run Code</span> to see the output here.
+                    Write your code and click <span className="text-brand-blue font-bold">Run Code</span> to see the output here.
                   </p>
                 </div>
               )}
@@ -431,12 +436,12 @@ export default function CodingTest() {
                   exit={{ y: 30, opacity: 0 }}
                   className={cn(
                     'rounded-xl p-5 border relative overflow-hidden',
-                    result.success ? 'bg-google-green/10 border-google-green/30' : 'bg-google-red/10 border-google-red/30'
+                    result.success ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-rose-500/10 border-rose-500/30'
                   )}
                 >
                   <div className="relative z-10">
                     <div className="flex items-start gap-3 mb-3">
-                      <div className={cn('p-2 rounded-xl', result.success ? 'bg-google-green/20 text-google-green' : 'bg-google-red/20 text-google-red')}>
+                      <div className={cn('p-2 rounded-xl', result.success ? 'bg-emerald-500/20 text-emerald-500' : 'bg-rose-500/20 text-rose-500')}>
                         {result.success ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
                       </div>
                       <div>
@@ -451,7 +456,7 @@ export default function CodingTest() {
                         to="/contact"
                         className={cn(
                           'inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[10px] font-black transition-all hover:shadow-lg',
-                          result.success ? 'bg-google-green text-white' : 'bg-google-blue text-white'
+                          result.success ? 'bg-emerald-500 text-white' : 'bg-brand-blue text-white'
                         )}
                       >
                         {result.success ? 'Join Advanced Course' : 'Join to Succeed'} <ChevronRight size={11} />
@@ -460,7 +465,7 @@ export default function CodingTest() {
                   </div>
                   <div className={cn(
                     'absolute -top-8 -right-8 w-24 h-24 rounded-full blur-3xl opacity-20',
-                    result.success ? 'bg-google-green' : 'bg-google-red'
+                    result.success ? 'bg-emerald-500' : 'bg-rose-500'
                   )} />
                 </motion.div>
               )}
@@ -471,18 +476,18 @@ export default function CodingTest() {
           <div className="p-4 border-t border-white/10 shrink-0">
             <div className="flex items-center justify-between text-[10px] font-bold text-gray-600">
               <div className="flex items-center gap-2">
-                <Trophy size={12} className="text-google-yellow" />
+                <Trophy size={12} className="text-amber-500" />
                 <span>{solved ? '100' : '0'} pts earned</span>
               </div>
               <div className="flex items-center gap-2">
-                <Flame size={12} className="text-google-red" />
+                <Flame size={12} className="text-rose-500" />
                 <span>{solved ? '1' : '0'} solved today</span>
               </div>
               {result?.success && (
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="flex items-center gap-1 text-google-green"
+                  className="flex items-center gap-1 text-emerald-500"
                 >
                   <PartyPopper size={12} />
                   <span>+100 pts</span>

@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Fira Code", ui-monospace, SFMono-Regular, monospace;
 
-  --color-google-blue: #4285F4;
-  --color-google-red: #EA4335;
-  --color-google-yellow: #FBBC05;
-  --color-google-green: #34A853;
-  --color-google-gray: #5F6368;
-  --color-google-dark: #202124;
+  --color-brand-blue: #00B4D8;
+  --color-brand-blue-hover: #0096C7;
+  --color-brand-dark: #0B1626;
+  --color-brand-darker: #050A14;
+  --color-brand-gray: #828B9A;
+  --color-brand-light: #F4F7F9;
 
-  --radius-google: 0.75rem;
-  --shadow-google: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
-  --shadow-google-hover: 0 4px 4px 0 rgba(60, 64, 67, 0.3), 0 12px 20px 8px rgba(60, 64, 67, 0.15);
+  --radius-brand: 0.75rem;
+  --shadow-brand: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --shadow-brand-hover: 0 10px 30px -5px rgba(0, 180, 216, 0.15);
   
   --animate-shimmer: shimmer 2s infinite linear;
   
@@ -26,7 +26,7 @@
 
 @layer base {
   body {
-    @apply font-sans text-google-dark bg-white antialiased selection:bg-google-blue selection:text-white;
+    @apply font-sans text-brand-dark bg-white antialiased selection:bg-brand-blue selection:text-white;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -38,23 +38,23 @@
     @apply w-2;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-gray-50;
+    @apply bg-brand-darker;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+    @apply bg-brand-blue/50 rounded-full hover:bg-brand-blue transition-colors;
   }
 }
 
-.google-card {
-  @apply bg-white rounded-google shadow-google transition-all duration-300 hover:shadow-google-hover hover:-translate-y-1;
+.brand-card {
+  @apply bg-white rounded-brand shadow-brand transition-all duration-300 hover:shadow-brand-hover hover:-translate-y-1;
 }
 
 .btn-primary {
-  @apply relative overflow-hidden bg-google-blue text-white px-8 py-3 rounded-google font-semibold hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-blue-200;
+  @apply relative overflow-hidden bg-brand-blue text-white px-8 py-3 rounded-full font-bold hover:bg-brand-blue-hover transition-all active:scale-95 shadow-lg shadow-brand-blue/30;
 }
 
 .btn-outline {
-  @apply border-2 border-gray-200 text-google-blue px-8 py-3 rounded-google font-semibold hover:bg-gray-50 hover:border-google-blue transition-all active:scale-95;
+  @apply border-2 border-white/20 text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-brand-dark transition-all active:scale-95;
 }
 
 .glass {
@@ -68,5 +68,5 @@
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-google-blue via-google-red to-google-yellow;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-cyan-300;
 }

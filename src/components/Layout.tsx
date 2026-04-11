@@ -4,6 +4,52 @@ import { Code2, Menu, X, Instagram, Facebook, Youtube, MessageSquare, ArrowUp, G
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 
+const CursorFollower = () => {
+  const [position, setPosition] = React.useState({ x: 0, y: 0 });
+  const [isPointer, setIsPointer] = React.useState(false);
+  const cursorRef = React.useRef({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      cursorRef.current = { x: e.clientX, y: e.clientY };
+      setPosition({ x: e.clientX, y: e.clientY });
+      const target = e.target as HTMLElement;
+      setIsPointer(window.getComputedStyle(target).cursor === 'pointer');
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <>
+      <motion.div
+        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] rounded-full hidden lg:block border border-brand-blue/50"
+        animate={{
+          x: position.x - 16,
+          y: position.y - 16,
+          scale: isPointer ? 1.5 : 1,
+          backgroundColor: isPointer ? 'rgba(0, 180, 216, 0.2)' : 'transparent',
+        }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300, mass: 0.5 }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 bg-brand-blue pointer-events-none z-[9999] rounded-full hidden lg:block"
+        animate={{
+          x: position.x - 4,
+          y: position.y - 4,
+        }}
+        transition={{ type: 'spring', damping: 35, stiffness: 500, mass: 0.1 }}
+      />
+      <div 
+        className="fixed inset-0 pointer-events-none z-[9998] opacity-30"
+        style={{
+          background: `radial-gradient(circle 400px at ${position.x}px ${position.y}px, rgba(0, 180, 216, 0.05), transparent)`
+        }}
+      />
+    </>
+  );
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
@@ -23,7 +69,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Coding Test', path: '/coding-test' },
+    { name: 'Courses', path: '/courses' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -32,10 +78,12 @@ const Navbar = () => {
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-      scrolled || isCodingTest ? "bg-white/90 backdrop-blur-xl shadow-lg py-2" : "bg-transparent py-4"
+      scrolled || isCodingTest 
+        ? "bg-brand-dark/95 backdrop-blur-xl border-b border-white/10 shadow-lg py-3" 
+        : "bg-brand-dark/40 backdrop-blur-sm py-5"
     )}>
       <motion.div 
-        className="absolute top-0 left-0 right-0 h-1 bg-google-blue origin-left z-50"
+        className="absolute top-0 left-0 right-0 h-1 bg-brand-blue origin-left z-50 shadow-[0_0_15px_rgba(0,180,216,0.8)]"
         style={{ scaleX }}
       />
       
@@ -43,14 +91,17 @@ const Navbar = () => {
         <div className="flex justify-between h-16 items-center">
           <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
             <motion.div 
-              whileHover={{ rotate: 180 }}
-              transition={{ duration: 0.5 }}
-              className="bg-google-blue p-1.5 sm:p-2 rounded-xl shadow-lg shadow-google-blue/20"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.8 }}
+              className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center"
             >
-              <Code2 className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+              <img src="/logo.svg" alt="Logo" className="w-full h-full" />
             </motion.div>
-            <span className="text-xl sm:text-2xl font-black tracking-tighter text-google-dark group-hover:text-google-blue transition-colors">
-              GENESIS<span className="text-google-blue">IT</span>ACADEMY
+            <span className={cn(
+              "text-xl sm:text-2xl font-black tracking-tighter transition-colors",
+              "text-white group-hover:text-cyan-400"
+            )}>
+              Genesis <span className="text-brand-blue">IT</span> Academy
             </span>
           </Link>
 
@@ -64,20 +115,20 @@ const Navbar = () => {
               >
                 <span className={cn(
                   "text-sm font-bold transition-colors",
-                  location.pathname === link.path ? "text-google-blue" : "text-google-gray group-hover:text-google-blue"
+                  location.pathname === link.path ? "text-cyan-400" : "text-gray-300 group-hover:text-cyan-400"
                 )}>
                   {link.name}
                 </span>
                 <motion.div 
                   className={cn(
-                    "absolute bottom-0 left-0 h-0.5 bg-google-blue rounded-full",
+                    "absolute bottom-0 left-0 h-0.5 bg-cyan-400 rounded-full",
                     location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
                   )}
                   transition={{ duration: 0.3 }}
                 />
               </Link>
             ))}
-            <Link to="/contact" className="btn-primary px-8 py-3 text-sm shadow-xl shadow-google-blue/20 hover:scale-105 active:scale-95 transition-all">
+            <Link to="/contact" className="btn-primary text-sm shadow-brand-blue/20">
               Apply Now
             </Link>
           </div>
@@ -86,7 +137,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)} 
-              className="text-google-dark p-2 hover:bg-gray-100 rounded-xl transition-colors"
+              className="text-white p-2 hover:bg-white/10 rounded-xl transition-colors"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -101,7 +152,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-white shadow-2xl border-t border-gray-100 overflow-hidden"
+            className="md:hidden absolute top-full left-0 right-0 bg-brand-dark shadow-2xl border-t border-white/10 overflow-hidden"
           >
             <div className="px-6 py-8 space-y-4">
               {navLinks.map((link, i) => (
@@ -116,7 +167,7 @@ const Navbar = () => {
                     onClick={() => setIsOpen(false)}
                     className={cn(
                       "block px-4 py-4 rounded-2xl text-lg font-bold transition-all",
-                      location.pathname === link.path ? "text-google-blue bg-blue-50" : "text-google-gray hover:bg-gray-50"
+                      location.pathname === link.path ? "text-cyan-400 bg-white/5" : "text-gray-300 hover:bg-white/5"
                     )}
                   >
                     {link.name}
@@ -132,7 +183,7 @@ const Navbar = () => {
                 <Link
                   to="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="block w-full text-center btn-primary py-5 text-lg shadow-xl shadow-google-blue/20"
+                  className="block w-full text-center btn-primary py-5 text-lg"
                 >
                   Apply Now
                 </Link>
@@ -149,130 +200,165 @@ const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="relative bg-google-dark text-white pt-24 pb-12 overflow-hidden">
+    <footer className="relative bg-brand-darker text-white pt-24 pb-12 overflow-hidden border-t border-white/5">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-google-blue rounded-full blur-[120px]" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-google-red rounded-full blur-[120px]" />
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+        <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 10, repeat: Infinity }} className="absolute -top-24 -left-24 w-96 h-96 bg-brand-blue rounded-full blur-[150px]" />
+        <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 12, repeat: Infinity, delay: 2 }} className="absolute -bottom-24 -right-24 w-96 h-96 bg-cyan-700 rounded-full blur-[150px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-          <div className="space-y-8">
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-google-blue p-2 rounded-xl">
-                <Code2 className="text-white w-6 h-6" />
+        <motion.div 
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20"
+        >
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="space-y-8">
+            <Link to="/" className="flex items-center space-x-3 group whitespace-nowrap">
+              <div className="w-10 h-10 group-hover:scale-110 transition-transform">
+                <img src="/logo.svg" alt="Logo" className="w-full h-full" />
               </div>
-              <span className="text-2xl font-black tracking-tighter">GENESIS<span className="text-google-blue">IT</span>ACADEMY</span>
+              <span className="text-2xl font-black tracking-tighter">Genesis <span className="text-brand-blue">IT</span> Academy</span>
             </Link>
             <p className="text-gray-400 text-lg leading-relaxed font-medium">
               Empowering the next generation of developers through hands-on mentorship and industry-standard projects.
             </p>
-            <div className="flex space-x-4">
-              {[
-                { icon: <Instagram size={20} />, label: "Instagram", color: "hover:bg-pink-500" },
-                { icon: <Facebook size={20} />, label: "Facebook", color: "hover:bg-blue-600" },
-                { icon: <Youtube size={20} />, label: "Youtube", color: "hover:bg-red-600" }
-              ].map((social, i) => (
-                <motion.a 
-                  key={i}
-                  href="#" 
-                  whileHover={{ y: -5, scale: 1.1 }}
-                  className={cn(
-                    "p-3 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300",
-                    social.color
-                  )}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
-          </div>
+          </motion.div>
           
-          <div>
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}>
             <h4 className="text-xl font-bold mb-8 flex items-center gap-2">
-              <Globe size={20} className="text-google-blue" />
-              Academy
+              <Globe size={20} className="text-brand-blue" />
+              Programs
             </h4>
             <ul className="space-y-4">
-              {['Curriculum', 'Mentors', 'Success Stories', 'Admissions'].map((item) => (
+              {['Artificial intelligence', 'Python', 'Robotics'].map((item) => (
                 <li key={item}>
-                  <Link to="/" className="text-gray-400 hover:text-google-blue transition-colors flex items-center gap-2 group">
-                    <div className="w-1.5 h-1.5 rounded-full bg-google-blue opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Link to="/courses" className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center gap-2 group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     {item}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}>
             <h4 className="text-xl font-bold mb-8 flex items-center gap-2">
-              <Code2 size={20} className="text-google-green" />
-              Resources
+              <Code2 size={20} className="text-brand-blue" />
+              Quick links
             </h4>
             <ul className="space-y-4">
-              {['Coding Test', 'Free Brochure', 'GitHub Projects', 'Developer Blog'].map((item) => (
-                <li key={item}>
-                  <Link to={item === 'Coding Test' ? '/coding-test' : '/'} className="text-gray-400 hover:text-google-green transition-colors flex items-center gap-2 group">
-                    <div className="w-1.5 h-1.5 rounded-full bg-google-green opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {item}
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'Courses', path: '/courses' },
+                { name: 'Contact', path: '/contact' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link to={item.path} className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center gap-2 group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="space-y-8">
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="space-y-8">
             <h4 className="text-xl font-bold mb-8 flex items-center gap-2">
-              <MessageSquare size={20} className="text-google-yellow" />
+              <MessageSquare size={20} className="text-brand-blue" />
               Get in Touch
             </h4>
             <div className="space-y-6">
               <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-google-blue/20 transition-colors">
-                  <Mail size={18} className="text-google-blue" />
+                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-brand-blue/20 transition-colors">
+                  <Mail size={18} className="text-brand-blue" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Email</p>
-                  <p className="text-sm font-bold">hello@genesisitacademy.com</p>
+                  <p className="text-sm font-bold text-gray-300">hello@genesisitacademy.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-google-green/20 transition-colors">
-                  <Phone size={18} className="text-google-green" />
+                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-brand-blue/20 transition-colors">
+                  <Phone size={18} className="text-brand-blue" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Phone</p>
-                  <p className="text-sm font-bold">+91 98765 43210</p>
+                  <p className="text-sm font-bold text-gray-300">+91 98765 43210</p>
                 </div>
               </div>
+
+              {/* Social Icons Moved Here */}
+              <div className="flex space-x-4 pt-4">
+                {[
+                  { icon: <Instagram size={20} />, label: "Instagram", color: "hover:text-pink-500 hover:border-pink-500" },
+                  { icon: <Facebook size={20} />, label: "Facebook", color: "hover:text-blue-500 hover:border-blue-500" },
+                  { icon: <Youtube size={20} />, label: "Youtube", color: "hover:text-red-500 hover:border-red-500" }
+                ].map((social, i) => (
+                  <motion.a 
+                    key={i}
+                    href="#" 
+                    whileHover={{ y: -5, scale: 1.1 }}
+                    className={cn(
+                      "p-3 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 text-gray-400",
+                      social.color
+                    )}
+                  >
+                    {social.icon}
+                  </motion.a>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         
-        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8"
+        >
           <div className="text-gray-500 text-sm font-medium">
             © 2026 GenesisITAcademy. Built with passion for the next generation.
           </div>
           <div className="flex items-center gap-8">
             <div className="flex gap-6 text-sm font-bold text-gray-400">
-              <Link to="/" className="hover:text-white transition-colors">Privacy</Link>
-              <Link to="/" className="hover:text-white transition-colors">Terms</Link>
+              <Link to="/terms" className="hover:text-cyan-400 transition-colors">Terms & Conditions</Link>
+              <Link to="/" className="hover:text-cyan-400 transition-colors">Privacy</Link>
             </div>
             <motion.button 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={scrollToTop}
-              className="p-4 bg-google-blue text-white rounded-2xl shadow-lg shadow-google-blue/20"
+              className="p-4 bg-brand-blue text-white rounded-2xl shadow-lg shadow-brand-blue/20 hover:bg-brand-blue-hover"
             >
               <ArrowUp size={20} />
             </motion.button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
 };
 
-export { Navbar, Footer };
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      <CursorFollower />
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export { Navbar, Footer, Layout };

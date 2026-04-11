@@ -1,244 +1,167 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Code, Users, Rocket, Trophy, Play, CheckCircle2, Github, ExternalLink } from 'lucide-react';
+import { ArrowRight, Code, Users, Rocket, Trophy, Play, CheckCircle2, Github, ExternalLink, Globe, ArrowUp, Terminal, Cpu, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '../lib/utils';
 
-const Hero = () => (
-  <section className="relative py-24 overflow-hidden bg-gradient-to-b from-blue-50/50 to-white">
-    <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.1, 1],
-          rotate: [0, 5, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute -top-24 -left-24 w-96 h-96 bg-google-blue/5 rounded-full blur-3xl"
-      />
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.2, 1],
-          rotate: [0, -5, 0],
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/2 -right-24 w-80 h-80 bg-google-yellow/5 rounded-full blur-3xl"
-      />
-    </div>
+const Hero = () => {
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
 
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+  return (
+    <section 
+      className="relative min-h-[90vh] flex items-center overflow-hidden"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      }}
+    >
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0 scale-105">
+        <img 
+          src="/modern_it_office_hero_1775842278295.png" 
+          alt="Office Hero" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-brand-dark/80 backdrop-blur-[2px]" />
+        
+        {/* Ambient Glow that follows mouse */}
+        <motion.div 
+          className="absolute w-[600px] h-[600px] rounded-full bg-brand-blue/10 blur-[120px] pointer-events-none transition-opacity duration-500"
+          animate={{
+            x: mousePos.x - 300,
+            y: mousePos.y - 300,
+          }}
+        />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl"
         >
-          <motion.span 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-google-blue/10 text-google-blue text-sm font-bold mb-8"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-google-blue opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-google-blue"></span>
-            </span>
-            Admissions Open for 2026 Batch
-          </motion.span>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-google-dark leading-[1.1] mb-8">
-            Master <span className="text-google-blue">Real-World</span> Coding Skills
-          </h1>
-          <p className="text-lg md:text-xl text-google-gray mb-12 leading-relaxed max-w-xl">
-            Join our industry-level coding academy where students learn through real coding practice, live mentorship, and project-based learning.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <Link to="/contact" className="btn-primary group flex items-center justify-center gap-2 text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-10">
-              Start Learning 
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowRight size={20} />
-              </motion.span>
-            </Link>
-            <Link to="/coding-test" className="btn-outline flex items-center justify-center gap-2 text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-10">
-              Take Live Coding Test <Code size={20} />
-            </Link>
-          </div>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-          className="relative"
-        >
-          <div className="relative z-10 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] bg-white p-2">
-            <img 
-              src="https://kidsparkeducation.org/hubfs/Featured%20Image%20-%20What%20is%20Coding_.jpg" 
-              alt="Coding Class" 
-              className="w-full h-auto rounded-2xl"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          
-          {/* Decorative Elements */}
-          <motion.div 
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-10 -left-10 bg-white p-6 rounded-2xl shadow-google flex items-center gap-4 z-20"
-          >
-            <div className="bg-google-green p-3 rounded-xl shadow-lg shadow-green-100">
-              <Users className="text-white" />
-            </div>
-            <div>
-              <p className="font-bold text-google-dark text-lg leading-none">500+ Students</p>
-              <p className="text-sm text-google-gray mt-1">Learning daily</p>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -top-10 -right-10 bg-white p-6 rounded-2xl shadow-google flex items-center gap-4 z-20"
-          >
-            <div className="bg-google-yellow p-3 rounded-xl shadow-lg shadow-yellow-100">
-              <Trophy className="text-white" />
-            </div>
-            <div>
-              <p className="font-bold text-google-dark text-lg leading-none">98% Success</p>
-              <p className="text-sm text-google-gray mt-1">Placement rate</p>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
-  </section>
-);
-
-const Showcase = () => (
-  <section className="py-32 bg-white">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-20"
-      >
-        <h2 className="text-4xl md:text-5xl font-bold text-google-dark mb-6">Academy Environment</h2>
-        <p className="text-google-gray max-w-2xl mx-auto text-lg">
-          Our classrooms simulate a real software development environment where students collaborate, build projects, and solve real coding challenges.
-        </p>
-      </motion.div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {[
-          { img: "https://media.licdn.com/dms/image/v2/C5612AQFQ_9qZNjTw5w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1624640033126?e=2147483647&t=Ga1cswFKSP6hL308qzKW0qT3f4fpkPruCrDemwOqdmU&v=beta", title: "Collaborative Labs", color: "border-google-blue" },
-          { img: "https://cdn.prod.website-files.com/618d852d383de946ce0e3fa5/67fe0fe2fa1a399a75a9e853_IMG_0957.JPG", title: "Mentor Support", color: "border-google-red" },
-          { img: "https://resources.finalsite.net/images/f_auto%2Cq_auto%2Ct_image_size_2/v1569520149/marlborough/spuqptbjgx01pkknl1jy/CodingClass-342.jpg", title: "Project Discussions", color: "border-google-yellow" },
-          { img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop", title: "Real-world Setup", color: "border-google-green" }
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className={cn("google-card overflow-hidden border-b-4", item.color)}
-          >
-            <div className="relative h-56 overflow-hidden">
-              <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" referrerPolicy="no-referrer" />
-            </div>
-            <div className="p-6">
-              <h3 className="font-bold text-google-dark text-lg">{item.title}</h3>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        className="mt-24 flex justify-center"
-      >
-        <div className="relative group cursor-pointer w-full max-w-5xl rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl">
-          <img 
-            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop" 
-            alt="Video Tour" 
-            className="w-full h-[20rem] sm:h-[30rem] object-cover brightness-75 group-hover:brightness-50 transition-all duration-700"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
+          <div className="flex items-center gap-3 text-brand-blue mb-6">
             <motion.div 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="bg-google-blue p-6 sm:p-8 rounded-full mb-4 sm:mb-6 shadow-2xl shadow-blue-500/50"
-            >
-              <Play fill="white" className="w-8 h-8 sm:w-10 sm:h-10" />
-            </motion.div>
-            <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-center">Watch Academy Tour</h3>
-            <p className="text-base sm:text-lg opacity-80 text-center">Experience the vibe in 60 seconds</p>
+              initial={{ width: 0 }}
+              animate={{ width: 32 }}
+              className="h-[2px] bg-brand-blue" 
+            />
+            <span className="text-xs font-black uppercase tracking-[0.3em] overflow-hidden">
+               <motion.span
+                 initial={{ y: 20 }}
+                 animate={{ y: 0 }}
+                 transition={{ delay: 0.2 }}
+                 className="block"
+               >
+                 Experience The Best IT Mentorship
+               </motion.span>
+            </span>
           </div>
-        </div>
-      </motion.div>
-    </div>
-  </section>
+          <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.05] mb-8 uppercase tracking-tighter">
+            Where <span className="text-brand-blue">Creativity</span> <br/>
+            Meets Cutting-Edge <br/>
+            Technology
+          </h1>
+          <p className="text-slate-300 text-lg md:text-xl mb-12 leading-relaxed max-w-2xl font-medium opacity-90">
+            Empowering the next generation of tech innovators through industry-leading IT courses designed for young minds. Bridge the gap between curiosity and professional-grade skills.
+          </p>
+          <div className="flex flex-wrap items-center gap-8">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link to="/contact" className="btn-primary group !rounded-md px-10 py-5 flex items-center gap-3">
+                START LEARNING <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+            <Link to="/courses" className="text-white font-black text-sm uppercase tracking-widest border-b-2 border-transparent hover:border-brand-blue transition-all pb-1 hover:text-brand-blue">
+              VIEW ALL COURSES
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Ticker = () => (
+  <div className="bg-brand-blue py-6 overflow-hidden border-y border-white/10 shadow-2xl relative z-20">
+    <motion.div 
+      animate={{ x: [0, -1000] }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      className="flex whitespace-nowrap gap-12 items-center"
+    >
+      {[...Array(10)].map((_, i) => (
+        <React.Fragment key={i}>
+          <span className="text-white text-lg font-black uppercase tracking-[0.2em] flex items-center gap-8">
+            AI EXPLORERS <Rocket className="w-6 h-6 rotate-45" />
+          </span>
+          <span className="text-white text-lg font-black uppercase tracking-[0.2em] flex items-center gap-8">
+            PYTHON PROGRAMMING <Terminal className="w-6 h-6" />
+          </span>
+          <span className="text-white text-lg font-black uppercase tracking-[0.2em] flex items-center gap-8">
+            ROBOTICS LAB <Cpu className="w-6 h-6" />
+          </span>
+          <span className="text-xl text-white/50 font-black">*</span>
+        </React.Fragment>
+      ))}
+    </motion.div>
+  </div>
 );
 
-const Curriculum = () => (
-  <section className="py-32 bg-gray-50">
+
+const CoursesSec = () => (
+  <section className="py-32 bg-slate-50 overflow-hidden text-center">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-20"
-      >
-        <h2 className="text-4xl md:text-5xl font-bold text-google-dark mb-6">Structured Curriculum</h2>
-        <p className="text-google-gray text-lg">Master technologies that companies actually use.</p>
-      </motion.div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="flex flex-col md:flex-row justify-between items-end mb-20 text-left gap-8">
+        <div>
+          <div className="flex items-center gap-3 text-brand-blue mb-4">
+            <div className="h-[2px] w-8 bg-brand-blue" />
+            <span className="text-xs font-black uppercase tracking-[0.3em]">Our Specialized Modules</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-brand-dark tracking-tighter uppercase leading-none">
+            Courses We Provide to <br/>
+            <span className="text-brand-blue">Elevate Your Future</span>
+          </h2>
+        </div>
+        <Link to="/courses" className="btn-primary !rounded-md px-10 py-4 shadow-xl shadow-brand-blue/20">
+          VIEW ALL COURSES
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          {
-            level: "Beginner",
-            color: "border-google-blue",
-            icon: <Code className="text-google-blue" />,
-            topics: ["Programming Fundamentals", "Python Basics", "Logic Building", "Git & GitHub"]
+          { 
+            icon: <Cpu size={32} />, 
+            title: "AI Explorers", 
+            desc: "Master the basics of block-based coding and progress to advanced Artificial Intelligence for Ages 8-11." 
           },
-          {
-            level: "Intermediate",
-            color: "border-google-yellow",
-            icon: <Rocket className="text-google-yellow" />,
-            topics: ["Web Development (React)", "Database Design (SQL/NoSQL)", "APIs & Integration", "State Management"]
+          { 
+            icon: <Terminal size={32} />, 
+            title: "Python Lab", 
+            desc: "Learn core programming syntax and master functional coding with professional Python packages." 
           },
-          {
-            level: "Advanced",
-            color: "border-google-green",
-            icon: <Trophy className="text-google-green" />,
-            topics: ["System Design", "Cloud Deployment (AWS/GCP)", "Real-world Projects", "Microservices Architecture"]
+          { 
+            icon: <Globe size={32} />, 
+            title: "Robotics & IoT", 
+            desc: "Interface with Arduino hardware to create smart systems and explore Computer Vision modules." 
           }
-        ].map((item, i) => (
-          <motion.div 
-            key={i} 
+        ].map((course, idx) => (
+          <motion.div
+            key={idx}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -10, rotateX: 5, rotateY: 5 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.15 }}
-            className={cn("google-card p-10 border-t-8", item.color)}
+            transition={{ delay: idx * 0.1, type: "spring", stiffness: 300 }}
+            className="bg-white p-10 rounded-2xl shadow-xl hover:shadow-brand-blue/20 transition-all group text-left border border-slate-100 perspective-1000"
           >
-            <div className="mb-8 flex justify-between items-center">
-              <h3 className="text-3xl font-bold">{item.level}</h3>
-              <div className="p-3 bg-gray-50 rounded-2xl">{item.icon}</div>
+            <div className="w-16 h-16 bg-brand-blue p-4 rounded-xl text-white mb-8 group-hover:scale-110 group-hover:rotate-12 transition-transform shadow-lg shadow-brand-blue/20">
+              {course.icon}
             </div>
-            <ul className="space-y-6">
-              {item.topics.map((topic, j) => (
-                <li key={j} className="flex items-center gap-4 text-google-gray text-lg">
-                  <CheckCircle2 className="text-google-green w-6 h-6 flex-shrink-0" />
-                  <span>{topic}</span>
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-xl font-black text-brand-dark uppercase mb-4 tracking-tight group-hover:text-brand-blue transition-colors">{course.title}</h3>
+            <p className="text-slate-500 text-sm leading-relaxed mb-8">{course.desc}</p>
+            <Link to="/courses" className="inline-flex items-center gap-2 text-brand-blue font-black text-[10px] uppercase tracking-widest hover:gap-4 transition-all">
+              LEARN MORE <ArrowRight size={14} />
+            </Link>
           </motion.div>
         ))}
       </div>
@@ -246,164 +169,120 @@ const Curriculum = () => (
   </section>
 );
 
-const WhyUs = () => (
-  <section className="py-32 bg-google-dark text-white relative overflow-hidden">
-    <div className="absolute top-0 right-0 w-full h-full pointer-events-none opacity-10">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-google-blue rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-google-red rounded-full blur-[120px]" />
-    </div>
-
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
-        {[
-          { icon: <Code className="w-10 h-10" />, title: "Real Coding Practice", desc: "Students spend 70% of their time writing actual code, not just watching videos." },
-          { icon: <Users className="w-10 h-10" />, title: "Industry Mentors", desc: "Learn directly from senior engineers working at top tech companies." },
-          { icon: <Rocket className="w-10 h-10" />, title: "Project-Based", desc: "Build a professional portfolio with real-world applications and tools." },
-          { icon: <Trophy className="w-10 h-10" />, title: "Weekly Challenges", desc: "Participate in coding contests and hackathons to sharpen your skills." }
-        ].map((item, i) => (
-          <motion.div 
-            key={i} 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="text-center group"
-          >
-            <motion.div 
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="bg-white/10 w-20 h-20 rounded-[2rem] flex items-center justify-center mx-auto mb-8 text-google-blue group-hover:bg-google-blue group-hover:text-white transition-all duration-300"
-            >
-              {item.icon}
-            </motion.div>
-            <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-            <p className="text-gray-400 leading-relaxed">{item.desc}</p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-const Outcomes = () => (
-  <section className="py-32">
+const ProcessSec = () => (
+  <section className="py-32 bg-white overflow-hidden text-center">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-20"
-      >
-        <h2 className="text-4xl md:text-5xl font-bold text-google-dark mb-6">Student Outcomes</h2>
-        <p className="text-google-gray text-lg">Real results from our graduates.</p>
-      </motion.div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {[
-          {
-            title: "E-commerce Platform",
-            desc: "A full-stack React & Node.js application with Stripe integration and real-time inventory.",
-            tech: ["React", "Node.js", "MongoDB", "Stripe"],
-            img: "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2066&auto=format&fit=crop"
-          },
-          {
-            title: "AI Chat Assistant",
-            desc: "Real-time chat application powered by Gemini API with multimodal support.",
-            tech: ["Python", "WebSocket", "React", "Gemini"],
-            img: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2062&auto=format&fit=crop"
-          }
-        ].map((project, i) => (
-          <motion.div 
-            key={i} 
-            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="google-card overflow-hidden group"
-          >
-            <div className="relative overflow-hidden h-80">
-              <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
-              <div className="absolute inset-0 bg-google-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6">
-                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className="bg-white text-google-dark p-4 rounded-full hover:bg-google-blue hover:text-white transition-colors shadow-2xl">
-                  <Github size={28} />
-                </motion.button>
-                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className="bg-white text-google-dark p-4 rounded-full hover:bg-google-blue hover:text-white transition-colors shadow-2xl">
-                  <ExternalLink size={28} />
-                </motion.button>
+      <div className="mb-24">
+        <div className="flex items-center justify-center gap-3 text-brand-blue mb-4">
+          <div className="h-[2px] w-8 bg-brand-blue" />
+          <span className="text-xs font-black uppercase tracking-[0.3em]">Our Learning Flow</span>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-black text-brand-dark tracking-tighter uppercase">
+          Our Proven <span className="text-brand-blue">Success Process</span>
+        </h2>
+      </div>
+
+      <div className="relative">
+        {/* Animated Connection Path */}
+        <div className="absolute top-12 left-[10%] right-[10%] h-[2px] hidden md:block">
+          <svg className="w-full h-full overflow-visible">
+            <motion.path
+              d="M 0 1 h 800"
+              stroke="#E2E8F0"
+              strokeWidth="2"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+            <motion.path
+              d="M 0 1 h 800"
+              stroke="#00B4D8"
+              strokeWidth="2"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
+            />
+          </svg>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+          {[
+            { n: "01", t: "Registration", d: "Join our community and select your primary module.", icon: <Users size={24} /> },
+            { n: "02", t: "Live Sessions", d: "Experience 100% interactive lessons with industry mentors.", icon: <Play size={24} /> },
+            { n: "03", t: "Portfolio Build", d: "Develop a tangible project to showcase your new skills.", icon: <Code size={24} /> },
+            { n: "04", t: "Certification", d: "Earn a formal Online certificate recognized globally.", icon: <Trophy size={24} /> }
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.2, type: "spring", stiffness: 200 }}
+              className="flex flex-col items-center group"
+            >
+              <div className="w-24 h-24 rounded-full bg-white border-2 border-slate-100 flex items-center justify-center text-brand-blue mb-8 relative group-hover:border-brand-blue group-hover:scale-110 transition-all shadow-lg group-hover:shadow-brand-blue/30 group-hover:rotate-[360deg] duration-700">
+                {item.icon}
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  className="absolute top-0 right-0 w-8 h-8 rounded-full bg-brand-blue text-white text-[10px] font-black flex items-center justify-center shadow-md"
+                >
+                  {item.n}
+                </motion.div>
               </div>
-            </div>
-            <div className="p-10">
-              <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
-              <p className="text-google-gray text-lg mb-8 leading-relaxed">{project.desc}</p>
-              <div className="flex flex-wrap gap-3">
-                {project.tech.map((t, j) => (
-                  <span key={j} className="px-4 py-1.5 bg-gray-100 rounded-full text-sm font-bold text-google-gray">{t}</span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+              <h4 className="font-black text-brand-dark uppercase text-sm mb-3 group-hover:text-brand-blue transition-colors">{item.t}</h4>
+              <p className="text-slate-500 text-xs leading-relaxed max-w-[200px]">{item.d}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 );
 
-const CTA = () => (
-  <section className="py-32">
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        className="bg-google-blue rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-16 md:p-24 text-center text-white relative overflow-hidden shadow-[0_30px_100px_rgba(66,133,244,0.3)]"
-      >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-48 -mt-48 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full -ml-48 -mb-48 blur-3xl" />
+const FinalCTA = () => (
+  <section className="bg-brand-dark py-20 px-4 overflow-hidden">
+     <div className="max-w-7xl mx-auto bg-brand-blue rounded-[3rem] p-12 md:p-24 text-center text-white relative group overflow-hidden">
+        {/* Background Animation */}
+        <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10" />
+        <motion.div 
+           animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+           transition={{ duration: 5, repeat: Infinity }}
+           className="absolute -top-1/2 -left-1/4 w-full h-full bg-white rounded-full blur-[120px]" 
+        />
         
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8 relative z-10 leading-tight">Ready to Start Your Journey?</h2>
-        <p className="text-lg md:text-2xl opacity-90 mb-8 sm:mb-12 max-w-3xl mx-auto relative z-10 leading-relaxed">
-          Admissions are open for the 2026 batch. Limited seats available to ensure personalized mentorship.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 relative z-10">
-          <Link to="/contact" className="bg-white text-google-blue px-8 sm:px-12 py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 shadow-2xl">
-            Apply Now
-          </Link>
-          <Link to="/coding-test" className="bg-transparent border-2 border-white text-white px-8 sm:px-12 py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl hover:bg-white/10 transition-all hover:scale-105 active:scale-95">
-            Try Coding Test
-          </Link>
+        <div className="relative z-10">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none mb-10">
+            SUCCESS BEYOND <br/>THE SCREEN
+          </h2>
+          <p className="text-white/80 text-lg mb-12 max-w-2xl mx-auto font-medium">
+             Join our industry-leading coding academy where curiosity meets professional-grade skills. Get a head start on the most in-demand career paths of the 21st century.
+          </p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <Link to="/contact" className="px-12 py-5 bg-brand-dark text-white rounded-md font-black text-sm hover:translate-y-[-4px] transition-all uppercase tracking-[0.2em] shadow-2xl">
+              ENROLL NOW
+            </Link>
+            <Link to="/courses" className="px-12 py-5 bg-white text-brand-blue rounded-md font-black text-sm hover:translate-y-[-4px] transition-all uppercase tracking-[0.2em] shadow-2xl">
+              LEARN MORE
+            </Link>
+          </div>
         </div>
-      </motion.div>
-    </div>
+     </div>
   </section>
 );
 
 export default function Home() {
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden pt-16">
       <Hero />
-      <Showcase />
-      <Curriculum />
-      <WhyUs />
-      <Outcomes />
-      <section className="py-32 bg-gray-50 overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">Test Your Skills Instantly</h2>
-            <p className="text-google-gray text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-              Experience our browser-based coding simulator. Solve real problems and get instant feedback on your logic.
-            </p>
-            <Link to="/coding-test" className="btn-primary inline-flex items-center gap-3 text-xl py-5 px-12">
-              Start Coding Test <Code size={24} />
-            </Link>
-          </motion.div>
-        </div>
-        
-        {/* Background Decoration */}
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-google-blue/10 to-transparent -translate-y-1/2" />
-      </section>
-      <CTA />
+      <Ticker />
+      <CoursesSec />
+      <ProcessSec />
+      <FinalCTA />
     </div>
   );
 }
