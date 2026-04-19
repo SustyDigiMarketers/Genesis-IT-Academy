@@ -1,6 +1,21 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Code2, Menu, X, Instagram, Facebook, Youtube, MessageSquare, ArrowUp, Globe, Mail, Phone } from 'lucide-react';
+import {
+  Instagram,
+  Facebook,
+  Youtube,
+  Mail,
+  Phone,
+  Globe,
+  Code2,
+  MessageSquare,
+  ArrowUp,
+  MapPin,
+  ArrowRight,
+  Menu,
+  X,
+  ChevronRight
+} from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 
@@ -40,7 +55,7 @@ const CursorFollower = () => {
         }}
         transition={{ type: 'spring', damping: 35, stiffness: 500, mass: 0.1 }}
       />
-      <div 
+      <div
         className="fixed inset-0 pointer-events-none z-[9998] opacity-30"
         style={{
           background: `radial-gradient(circle 400px at ${position.x}px ${position.y}px, rgba(0, 180, 216, 0.05), transparent)`
@@ -78,24 +93,24 @@ const Navbar = () => {
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-      scrolled || isCodingTest 
-        ? "bg-brand-dark/95 backdrop-blur-xl border-b border-white/10 shadow-lg py-3" 
+      scrolled || isCodingTest
+        ? "bg-brand-dark/95 backdrop-blur-xl border-b border-white/10 shadow-lg py-3"
         : "bg-brand-dark/40 backdrop-blur-sm py-5"
     )}>
-      <motion.div 
+      <motion.div
         className="absolute top-0 left-0 right-0 h-1 bg-brand-blue origin-left z-50 shadow-[0_0_15px_rgba(0,180,216,0.8)]"
         style={{ scaleX }}
       />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
-            <motion.div 
+            <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.8 }}
-              className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center"
+              className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl overflow-hidden shadow-[0_0_10px_rgba(0,180,216,0.2)]"
             >
-              <img src="/logo.svg" alt="Logo" className="w-full h-full" />
+              <img src="/logo.png" alt="Logo" className="w-full h-full" />
             </motion.div>
             <span className={cn(
               "text-xl sm:text-2xl font-black tracking-tighter transition-colors",
@@ -119,7 +134,7 @@ const Navbar = () => {
                 )}>
                   {link.name}
                 </span>
-                <motion.div 
+                <motion.div
                   className={cn(
                     "absolute bottom-0 left-0 h-0.5 bg-cyan-400 rounded-full",
                     location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
@@ -135,8 +150,8 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
+            <button
+              onClick={() => setIsOpen(!isOpen)}
               className="text-white p-2 hover:bg-white/10 rounded-xl transition-colors"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -208,7 +223,7 @@ const Footer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -219,17 +234,20 @@ const Footer = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20"
         >
           <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="space-y-8">
-            <Link to="/" className="flex items-center space-x-3 group whitespace-nowrap">
-              <div className="w-10 h-10 group-hover:scale-110 transition-transform">
-                <img src="/logo.svg" alt="Logo" className="w-full h-full" />
+            <Link to="/" className="flex items-center space-x-4 group whitespace-nowrap">
+              <div className="w-16 h-16 group-hover:scale-110 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(0,180,216,0.4)] transition-transform bg-white/5 border border-white/10 p-2 flex items-center justify-center">
+                <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
               </div>
-              <span className="text-2xl font-black tracking-tighter">Genesis <span className="text-brand-blue">IT</span> Academy</span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-black tracking-tighter leading-none">Genesis <span className="text-brand-blue">IT</span></span>
+                <span className="text-xs font-black uppercase tracking-[0.4em] text-gray-500">Academy</span>
+              </div>
             </Link>
             <p className="text-gray-400 text-lg leading-relaxed font-medium">
               Empowering the next generation of developers through hands-on mentorship and industry-standard projects.
             </p>
           </motion.div>
-          
+
           <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}>
             <h4 className="text-xl font-bold mb-8 flex items-center gap-2">
               <Globe size={20} className="text-brand-blue" />
@@ -280,7 +298,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Email</p>
-                  <p className="text-sm font-bold text-gray-300">hello@genesisitacademy.com</p>
+                  <p className="text-sm font-bold text-gray-300">genesisitacademy00@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 group">
@@ -289,7 +307,16 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Phone</p>
-                  <p className="text-sm font-bold text-gray-300">+91 98765 43210</p>
+                  <p className="text-sm font-bold text-gray-300">Available on Inquiry</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 group">
+                <div className="p-3 bg-white/5 rounded-xl group-hover:bg-brand-blue/20 transition-colors">
+                  <MapPin size={18} className="text-brand-blue" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Visit Us</p>
+                  <p className="text-sm font-bold text-gray-300 leading-tight">137, George E.De Silva Mawatha, Kandy, Sri Lanka.</p>
                 </div>
               </div>
 
@@ -300,9 +327,9 @@ const Footer = () => {
                   { icon: <Facebook size={20} />, label: "Facebook", color: "hover:text-blue-500 hover:border-blue-500" },
                   { icon: <Youtube size={20} />, label: "Youtube", color: "hover:text-red-500 hover:border-red-500" }
                 ].map((social, i) => (
-                  <motion.a 
+                  <motion.a
                     key={i}
-                    href="#" 
+                    href="#"
                     whileHover={{ y: -5, scale: 1.1 }}
                     className={cn(
                       "p-3 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 text-gray-400",
@@ -316,8 +343,8 @@ const Footer = () => {
             </div>
           </motion.div>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -331,7 +358,7 @@ const Footer = () => {
               <Link to="/terms" className="hover:text-cyan-400 transition-colors">Terms & Conditions</Link>
               <Link to="/" className="hover:text-cyan-400 transition-colors">Privacy</Link>
             </div>
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={scrollToTop}
