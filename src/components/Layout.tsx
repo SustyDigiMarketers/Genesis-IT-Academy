@@ -354,15 +354,13 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8"
+          className="pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-12"
         >
-          <div className="text-gray-500 text-sm font-medium">
+          <div className="text-gray-500 text-sm font-medium text-center md:text-left">
             © 2026 GenesisITAcademy. Built with passion for the next generation.
           </div>
-          <div className="flex items-center gap-8">
-            <div className="flex gap-6 text-sm font-bold text-gray-400">
-              <Link to="/terms" className="hover:text-cyan-400 transition-colors">Terms & Conditions</Link>
-            </div>
+          <div className="flex items-center">
+            <Link to="/terms" className="text-sm font-bold text-gray-400 hover:text-cyan-400 transition-colors">Terms & Conditions</Link>
           </div>
         </motion.div>
       </div>
