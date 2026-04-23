@@ -97,9 +97,9 @@ export default function Contact() {
         >
           <motion.h1
             variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-8xl font-black text-brand-dark mb-8 tracking-tighter uppercase leading-none"
+            className="text-4xl sm:text-6xl md:text-8xl font-black text-brand-dark mb-8 tracking-tighter uppercase leading-tight sm:leading-none"
           >
-            Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-400 drop-shadow-[0_0_15px_rgba(0,180,216,0.3)]">Touch</span>
+            Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-cyan-400 to-brand-blue bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(0,180,216,0.3)]">Touch</span>
           </motion.h1>
           <motion.p
             variants={itemVariants}
@@ -123,18 +123,23 @@ export default function Contact() {
             <div className="space-y-6 sm:space-y-8">
               <div className="flex items-center gap-3 mb-8 text-left">
                 <div className="w-10 h-[2px] bg-brand-blue" />
-                <h2 className="text-xl sm:text-2xl font-black text-brand-dark uppercase tracking-[0.3em]">Contact Information</h2>
+                <h2 className="text-xl sm:text-2xl font-black text-brand-dark uppercase tracking-[0.3em]">Contact Info</h2>
               </div>
               <div className="space-y-8">
                 {[
                   { icon: <Mail size={24} />, title: "Email", detail: "genesisitacademy00@gmail.com", sub: "Response within 24 hours", glow: "hover:shadow-brand-blue/10" },
-                  { icon: <Phone size={24} />, title: "Phone", detail: "Available on Inquiry", sub: "Mon-Sat, 9AM-7PM", glow: "hover:shadow-emerald-500/10" },
+                  { icon: <Phone size={24} />, title: "Phone", detail: "076 050 1061", sub: "Mon-Sat, 9AM-7PM", glow: "hover:shadow-emerald-500/10", link: "tel:0760501061" },
                   { icon: <MapPin size={24} />, title: "Location", detail: "137, George E.De Silva Mawatha,", sub: "Kandy, Sri Lanka.", glow: "hover:shadow-rose-500/10" }
                 ].map((item, i) => (
                   <motion.div
                     key={i}
                     whileHover={{ x: 15 }}
-                    className="flex items-start gap-6 group cursor-pointer text-left"
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => item.link && (window.location.href = item.link)}
+                    className={cn(
+                      "flex items-start gap-6 group cursor-pointer text-left",
+                      item.link && "hover:opacity-80 active:opacity-60"
+                    )}
                   >
                     <div className={cn(
                       "p-5 rounded-2xl transition-all duration-500 bg-white shadow-xl border border-slate-100 text-brand-blue group-hover:bg-brand-blue group-hover:text-white",
@@ -160,7 +165,7 @@ export default function Contact() {
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Live Support</h3>
                 <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">Secure direct pipeline to our admission engineers.</p>
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/94760501061"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 bg-emerald-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-bold hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20 text-sm sm:text-base uppercase tracking-widest"
@@ -205,23 +210,23 @@ export default function Contact() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                       <div className="space-y-3 group text-left">
                         <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 group-focus-within:text-brand-blue transition-colors">Full Name</label>
-                        <input required name="name" type="text" placeholder="John Doe" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all shadow-inner placeholder:text-slate-300" />
+                        <input required name="name" type="text" placeholder="John Doe" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all shadow-inner placeholder:text-slate-300 text-base" />
                       </div>
                       <div className="space-y-3 group text-left">
                         <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 group-focus-within:text-brand-blue transition-colors">Email Address</label>
-                        <input required name="email" type="email" placeholder="john@example.com" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all shadow-inner placeholder:text-slate-300" />
+                        <input required name="email" type="email" placeholder="john@example.com" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all shadow-inner placeholder:text-slate-300 text-base" />
                       </div>
                     </div>
                     <div className="space-y-3 group text-left">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 group-focus-within:text-brand-blue transition-colors">Student's Age</label>
-                      <input required name="age" type="text" placeholder="e.g. 12" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all shadow-inner placeholder:text-slate-300" />
+                      <input required name="age" type="text" placeholder="e.g. 12" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all shadow-inner placeholder:text-slate-300 text-base" />
                     </div>
                     <div className="space-y-3 group text-left">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 group-focus-within:text-brand-blue transition-colors">Interested Course</label>
                       <div className="relative">
-                        <select name="course" required className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-slate-600 focus:border-brand-blue focus:bg-white outline-none transition-all appearance-none cursor-pointer shadow-inner font-medium">
+                        <select name="course" required className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-slate-600 focus:border-brand-blue focus:bg-white outline-none transition-all appearance-none cursor-pointer shadow-inner font-medium text-base">
                           <option value="" disabled selected>Select Course</option>
-                          <option>AI from the Scratch (Ages 8–11)</option>
+                          <option>AI with SCRATCH PROGRAMMING (Ages 8–11)</option>
                           <option>Python (Ages 11–17)</option>
                           <option>Robotics (Ages 11–17)</option>
                         </select>
@@ -232,7 +237,7 @@ export default function Contact() {
                     </div>
                     <div className="space-y-3 group text-left">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 group-focus-within:text-brand-blue transition-colors">Message</label>
-                      <textarea required name="message" rows={4} placeholder="How can we assist your child's journey?" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all resize-none shadow-inner placeholder:text-slate-300"></textarea>
+                      <textarea required name="message" rows={4} placeholder="How can we assist your child's journey?" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent text-brand-dark focus:border-brand-blue focus:bg-white outline-none transition-all resize-none shadow-inner placeholder:text-slate-300 text-base"></textarea>
                     </div>
                     <motion.button
                       whileHover={{ scale: 1.02, backgroundColor: "#0096C7" }}

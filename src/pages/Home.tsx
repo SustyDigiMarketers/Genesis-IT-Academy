@@ -52,7 +52,7 @@ const Hero = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 relative z-10 w-full pt-16 sm:pt-20 pb-20 sm:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -76,9 +76,9 @@ const Hero = () => {
                 </motion.span>
               </span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-black text-white leading-[1.05] mb-8 uppercase tracking-tighter">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-[1.1] sm:leading-[1.05] mb-8 uppercase tracking-tighter">
               Empowering the <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-400 drop-shadow-[0_0_15px_rgba(0,180,216,0.3)]">Next Generation</span> <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-cyan-400 to-brand-blue bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(0,180,216,0.3)]">Next Generation</span> <br />
               of Tech Innovators
             </h1>
             <p className="text-slate-300 text-lg md:text-xl mb-12 leading-relaxed max-w-2xl font-medium opacity-90 border-l-2 border-brand-blue/30 pl-6">
@@ -89,15 +89,12 @@ const Hero = () => {
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,180,216,0.4)" }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link to="/contact" className="btn-primary group !rounded-none border-b-4 border-cyan-700 px-10 py-5 flex items-center gap-3 relative overflow-hidden">
+                <Link to="/courses" className="btn-primary group !rounded-none border-b-4 border-cyan-700 px-10 py-5 flex items-center gap-3 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <span className="relative z-10">START LEARNING</span>
+                  <span className="relative z-10">VIEW ALL COURSES</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
                 </Link>
               </motion.div>
-              <Link to="/courses" className="text-white font-black text-sm uppercase tracking-widest border-b-2 border-transparent hover:border-brand-blue transition-all pb-1 hover:text-brand-blue flex items-center gap-2">
-                VIEW MODULES <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
-              </Link>
             </div>
           </motion.div>
 
@@ -233,7 +230,7 @@ const WhyChooseUs = () => (
             viewport={{ once: true }}
             transition={{ delay: idx * 0.15, type: "spring", stiffness: 100 }}
             whileHover={{ y: -15, transition: { duration: 0.2 } }}
-            className="group flex flex-col items-center text-center p-12 rounded-[2.5rem] bg-white border border-slate-100 hover:border-brand-blue/30 transition-all duration-500 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_25px_60px_-15px_rgba(0,180,216,0.15)] relative overflow-hidden"
+            className="group flex flex-col items-center text-center p-8 sm:p-12 rounded-[2.5rem] bg-white border border-slate-100 hover:border-brand-blue/30 transition-all duration-500 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_25px_60px_-15px_rgba(0,180,216,0.15)] relative overflow-hidden"
           >
             {/* HUD Corner Decorations */}
             <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-slate-100 group-hover:border-brand-blue group-hover:w-6 group-hover:h-6 transition-all" />
@@ -320,7 +317,7 @@ const CoursesSec = () => {
             {[
               {
                 icon: <Cpu size={32} />,
-                title: "AI from the scratch",
+                title: "AI with SCRATCH PROGRAMMING",
                 age: "Ages 8 – 11",
                 desc: "AI Explorers | Visual learning tools | Built for beginners",
                 accent: "from-rose-500/20 to-transparent",
@@ -350,7 +347,7 @@ const CoursesSec = () => {
                 viewport={{ once: true, margin: "0px -50px" }}
                 whileTap={{ scale: 0.95 }}
                 className={cn(
-                  "flex-shrink-0 w-[88%] sm:w-[60%] md:w-full snap-center bg-white p-10 md:p-12 rounded-[3.5rem] shadow-2xl transition-all duration-700 border border-slate-100 relative group overflow-hidden",
+                  "flex-shrink-0 w-[90%] sm:w-[60%] md:w-full snap-center bg-white p-8 sm:p-12 rounded-[3rem] sm:rounded-[3.5rem] shadow-2xl transition-all duration-700 border border-slate-100 relative group overflow-hidden",
                   "md:bg-white/70 md:backdrop-blur-xl md:border-white/50 active:border-brand-blue/50",
                   course.glow
                 )}
@@ -466,7 +463,7 @@ const ProcessSec = () => (
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.2 }}
-            className="flex flex-col items-center group p-12 bg-white rounded-[3rem] shadow-xl hover:shadow-[0_30px_70px_-20px_rgba(0,180,216,0.15)] transition-all duration-500 border border-slate-100 relative overflow-hidden"
+            className="flex flex-col items-center group p-8 sm:p-12 bg-white rounded-[3rem] shadow-xl hover:shadow-[0_30px_70px_-20px_rgba(0,180,216,0.15)] transition-all duration-500 border border-slate-100 relative overflow-hidden"
           >
             {/* Scanning Line Effect */}
             <motion.div

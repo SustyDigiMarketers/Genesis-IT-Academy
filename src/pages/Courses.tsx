@@ -61,8 +61,8 @@ const CourseCard = ({ course, index }: { course: any, index: number }) => {
               {course.icon}
             </motion.div>
             <div>
-              <p className="text-brand-blue text-xs font-black uppercase tracking-[0.3em] mb-2">{course.age}</p>
-              <h3 className="text-3xl md:text-4xl font-black text-white tracking-tighter uppercase leading-none">{course.title}</h3>
+              <p className="text-brand-blue text-[10px] font-black uppercase tracking-[0.3em] mb-2">{course.age}</p>
+              <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-[1.1] sm:leading-none">{course.title}</h3>
             </div>
           </div>
           <motion.div
@@ -83,7 +83,7 @@ const CourseCard = ({ course, index }: { course: any, index: number }) => {
               transition={{ delay: i * 0.1 }}
               className="flex gap-4 items-start group/item"
             >
-              <div className="mt-2 shrink-0">
+              <div className="mt-2.5 sm:mt-2 shrink-0">
                 <div className="w-2 h-2 rounded-full bg-brand-blue shadow-[0_0_10px_#00B4D8] group-hover/item:scale-150 transition-transform" />
               </div>
               <p className="text-gray-400 text-sm leading-relaxed group-hover/item:text-white transition-colors">
@@ -110,7 +110,7 @@ const CourseCard = ({ course, index }: { course: any, index: number }) => {
 export default function Courses() {
   const courses = [
     {
-      title: "AI from the scratch",
+      title: "AI with SCRATCH PROGRAMMING",
       age: "Ages 8 – 11",
       icon: <Cpu size={32} />,
       duration: "3 Months",
@@ -215,8 +215,8 @@ export default function Courses() {
           >
             Courses
           </motion.span>
-          <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase mb-8 leading-none">
-            Our Expert-Led <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-400 drop-shadow-[0_0_15px_rgba(0,180,216,0.3)]">Courses</span>
+          <h1 className="text-4xl sm:text-8xl font-black text-white tracking-tighter uppercase mb-8 leading-none">
+            Our Expert-Led <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-cyan-400 to-brand-blue bg-[length:200%_auto] animate-shimmer drop-shadow-[0_0_15px_rgba(0,180,216,0.3)]">Courses</span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-medium max-w-3xl mx-auto border-l-2 border-brand-blue/20 pl-8">
             We offer specialized tracks designed to transition students from digital consumers to digital creators. Every course is taught by qualified professionals currently working in the IT industry, ensuring your child learns the most relevant, up-to-date skills.

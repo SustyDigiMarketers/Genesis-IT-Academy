@@ -62,7 +62,7 @@ export default function Terms() {
             <div className="space-y-4">
               <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:bg-white transition-colors cursor-default">
                 <p className="text-brand-blue font-black text-sm uppercase tracking-[0.2em] mb-4">Age Requirements:</p>
-                <p className="text-slate-500 text-lg leading-relaxed font-medium italic">Courses are strictly categorized by age groups to ensure curriculum suitability: AI from the scratch is for ages 8 to 11, while Python and Advanced Robotics courses are designed for ages 11 to 17.</p>
+                <p className="text-slate-500 text-lg leading-relaxed font-medium italic">Courses are strictly categorized by age groups to ensure curriculum suitability: AI with SCRATCH PROGRAMMING is for ages 8 to 11, while Python and Advanced Robotics courses are designed for ages 11 to 17.</p>
               </div>
             </div>
           </motion.div>
@@ -152,7 +152,7 @@ export default function Terms() {
                   title: "1. Full Payment (Standard)",
                   features: [
                     "Discounted Rate: Pay the full course fee upfront to secure the best available rate.",
-                    "Immediate Access: Receive instant access to all curriculum materials, including project guides for tracks like AI with Scratch or Python Essentials.",
+                    "Immediate Access: Receive instant access to all curriculum materials, including project guides for tracks like AI with SCRATCH PROGRAMMING or Python Essentials.",
                     "Due Date: Must be completed at least 48 hours before the first scheduled session."
                   ],
                   accent: "bg-brand-blue"

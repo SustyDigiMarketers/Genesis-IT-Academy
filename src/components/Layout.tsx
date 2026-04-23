@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Instagram,
   Facebook,
-  Youtube,
   Mail,
   Phone,
   Globe,
@@ -85,7 +84,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Courses', path: '/courses' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Contact Us', path: '/contact' },
   ];
 
   const isCodingTest = location.pathname === '/coding-test';
@@ -104,20 +103,23 @@ const Navbar = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-4 group min-w-max">
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.8 }}
-              className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl overflow-hidden shadow-[0_0_10px_rgba(0,180,216,0.2)]"
+              className="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center rounded-2xl overflow-hidden shadow-[0_0_15px_rgba(0,180,216,0.3)] bg-white/5 border border-white/10 p-1.5"
             >
-              <img src="/logo.png" alt="Logo" className="w-full h-full" />
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
             </motion.div>
-            <span className={cn(
-              "text-xl sm:text-2xl font-black tracking-tighter transition-colors",
-              "text-white group-hover:text-cyan-400"
-            )}>
-              Genesis <span className="text-brand-blue">IT</span> Academy
-            </span>
+            <div className="flex flex-col">
+              <span className={cn(
+                "text-lg sm:text-2xl font-black tracking-tighter transition-colors leading-none",
+                "text-white group-hover:text-cyan-400"
+              )}>
+                Genesis <span className="text-brand-blue">IT</span>
+              </span>
+              <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 group-hover:text-cyan-400/50 transition-colors">Academy</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -169,36 +171,39 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden absolute top-full left-0 right-0 bg-brand-dark shadow-2xl border-t border-white/10 overflow-hidden"
           >
-            <div className="px-6 py-8 space-y-4">
+            <div className="px-6 py-12 space-y-2">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.path}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.1, type: "spring", stiffness: 200, damping: 20 }}
                 >
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "block px-4 py-4 rounded-2xl text-lg font-bold transition-all",
-                      location.pathname === link.path ? "text-cyan-400 bg-white/5" : "text-gray-300 hover:bg-white/5"
+                      "flex items-center justify-between px-6 py-5 rounded-3xl text-xl font-black transition-all border border-transparent",
+                      location.pathname === link.path
+                        ? "text-cyan-400 bg-brand-blue/10 border-brand-blue/20"
+                        : "text-gray-300 hover:bg-white/5 active:scale-95"
                     )}
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    <ChevronRight size={20} className={cn("transition-transform", location.pathname === link.path ? "opacity-100" : "opacity-0")} />
                   </Link>
                 </motion.div>
               ))}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="pt-6"
+                transition={{ delay: 0.4 }}
+                className="pt-10"
               >
                 <Link
                   to="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="block w-full text-center btn-primary py-5 text-lg"
+                  className="block w-full text-center bg-brand-blue text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-brand-blue/20 active:scale-95 transition-all"
                 >
                   Apply Now
                 </Link>
@@ -274,7 +279,7 @@ const Footer = () => {
               {[
                 { name: 'Home', path: '/' },
                 { name: 'Courses', path: '/courses' },
-                { name: 'Contact', path: '/contact' }
+                { name: 'Contact Us', path: '/contact' }
               ].map((item) => (
                 <li key={item.name}>
                   <Link to={item.path} className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center gap-2 group">
@@ -307,7 +312,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Phone</p>
-                  <p className="text-sm font-bold text-gray-300">Available on Inquiry</p>
+                  <a href="tel:0760501061" className="text-sm font-bold text-gray-300 hover:text-brand-blue transition-colors">076 050 1061</a>
                 </div>
               </div>
               <div className="flex items-start gap-4 group">
@@ -323,16 +328,18 @@ const Footer = () => {
               {/* Social Icons Moved Here */}
               <div className="flex space-x-4 pt-4">
                 {[
-                  { icon: <Instagram size={20} />, label: "Instagram", color: "hover:text-pink-500 hover:border-pink-500" },
-                  { icon: <Facebook size={20} />, label: "Facebook", color: "hover:text-blue-500 hover:border-blue-500" },
-                  { icon: <Youtube size={20} />, label: "Youtube", color: "hover:text-red-500 hover:border-red-500" }
+                  { icon: <Instagram size={20} />, label: "Instagram", href: "https://www.instagram.com/genesisitacademy/", color: "hover:text-pink-500 hover:border-pink-500" },
+                  { icon: <Facebook size={20} />, label: "Facebook", href: "https://www.facebook.com/GenesisITacademy", color: "hover:text-blue-500 hover:border-blue-500" }
                 ].map((social, i) => (
                   <motion.a
                     key={i}
-                    href="#"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ y: -5, scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     className={cn(
-                      "p-3 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 text-gray-400",
+                      "p-4 sm:p-3 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 text-gray-400",
                       social.color
                     )}
                   >
