@@ -99,7 +99,7 @@ const CourseCard = ({ course, index }: { course: any, index: number }) => {
             className="group/btn relative inline-flex items-center gap-4 bg-brand-blue text-white px-10 py-5 rounded-md font-black text-sm uppercase tracking-[0.2em] overflow-hidden"
           >
             <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500" />
-            ENROLL IN MODULE <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
+            ENROLL <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
           </Link>
         </motion.div>
       </div>

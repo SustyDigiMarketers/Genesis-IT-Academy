@@ -127,7 +127,7 @@ export default function Contact() {
               </div>
               <div className="space-y-8">
                 {[
-                  { icon: <Mail size={24} />, title: "Email", detail: "genesisitacademy00@gmail.com", sub: "Response within 24 hours", glow: "hover:shadow-brand-blue/10" },
+                  { icon: <Mail size={24} />, title: "Email", detail: "genesisitacademy00@gmail.com", sub: "", glow: "hver:shadow-brand-blue/10" },
                   { icon: <Phone size={24} />, title: "Phone", detail: "076 050 1061", sub: "Mon-Sat, 9AM-7PM", glow: "hover:shadow-emerald-500/10", link: "tel:0760501061" },
                   { icon: <MapPin size={24} />, title: "Location", detail: "137, George E.De Silva Mawatha,", sub: "Kandy, Sri Lanka.", glow: "hover:shadow-rose-500/10" }
                 ].map((item, i) => (
