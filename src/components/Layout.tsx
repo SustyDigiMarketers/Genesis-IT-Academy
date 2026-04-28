@@ -209,7 +209,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                   className="block w-full text-center bg-brand-blue text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-brand-blue/20 active:scale-95 transition-all"
                 >
-                  Apply Now
+                  Enroll Now
                 </a>
               </motion.div>
             </div>
