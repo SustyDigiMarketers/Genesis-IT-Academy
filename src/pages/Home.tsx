@@ -165,7 +165,7 @@ const Ticker = () => (
             PYTHON PROGRAMMING <Terminal className="w-6 h-6" />
           </span>
           <span className="text-white text-lg font-black uppercase tracking-[0.2em] flex items-center gap-8">
-            ROBOTICS LAB <Cpu className="w-6 h-6" />
+            ROBOTICS <Cpu className="w-6 h-6" />
           </span>
           <span className="text-xl text-white/50 font-black">*</span>
         </React.Fragment>
@@ -557,12 +557,14 @@ const SuccessBeyondScreen = () => (
           {/* Animated Button Border */}
           <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue to-cyan-400 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse" />
 
-          <Link
-            to="/contact"
+          <a
+            href="https://wa.me/94760501061"
+            target="_blank"
+            rel="noopener noreferrer"
             className="relative px-16 py-7 bg-brand-blue text-white rounded-md font-black text-sm uppercase tracking-[0.3em] flex items-center gap-4 transition-all hover:bg-[#0096C7] shadow-[0_20px_50px_-15px_rgba(0,180,216,0.5)]"
           >
             Join our Advanced Coding courses <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </div>

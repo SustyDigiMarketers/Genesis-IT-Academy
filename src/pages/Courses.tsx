@@ -13,7 +13,7 @@ import {
   Braces,
   Binary
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+
 
 const CourseCard = ({ course, index }: { course: any, index: number }) => {
   const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
@@ -94,13 +94,15 @@ const CourseCard = ({ course, index }: { course: any, index: number }) => {
         </div>
 
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-          <Link
-            to="/contact"
+          <a
+            href="https://wa.me/94760501061"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group/btn relative inline-flex items-center gap-4 bg-brand-blue text-white px-10 py-5 rounded-md font-black text-sm uppercase tracking-[0.2em] overflow-hidden"
           >
             <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500" />
             ENROLL <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </motion.div>
@@ -289,9 +291,14 @@ export default function Courses() {
 
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase mb-10 leading-none">READY TO <br />UPGRADE YOUR SKILLS?</h2>
-            <Link to="/contact" className="inline-flex items-center gap-4 bg-brand-blue text-white px-12 py-5 rounded-md font-black text-sm uppercase tracking-[0.2em] shadow-2xl hover:scale-105 active:scale-95 transition-all">
+            <a 
+              href="https://wa.me/94760501061" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-4 bg-brand-blue text-white px-12 py-5 rounded-md font-black text-sm uppercase tracking-[0.2em] shadow-2xl hover:scale-105 active:scale-95 transition-all"
+            >
               Join our Advanced Coding courses <ArrowRight size={18} />
-            </Link>
+            </a>
           </div>
         </motion.div>
       </div>

@@ -142,9 +142,14 @@ const Navbar = () => {
                 />
               </Link>
             ))}
-            <Link to="/contact" className="btn-primary text-sm shadow-brand-blue/20">
-              Apply Now
-            </Link>
+            <a 
+              href="https://wa.me/94760501061" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-primary text-sm shadow-brand-blue/20"
+            >
+              Enroll Now
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -197,13 +202,15 @@ const Navbar = () => {
                 transition={{ delay: 0.4 }}
                 className="pt-10"
               >
-                <Link
-                  to="/contact"
+                <a
+                  href="https://wa.me/94760501061"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
                   className="block w-full text-center bg-brand-blue text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-brand-blue/20 active:scale-95 transition-all"
                 >
                   Apply Now
-                </Link>
+                </a>
               </motion.div>
             </div>
           </motion.div>

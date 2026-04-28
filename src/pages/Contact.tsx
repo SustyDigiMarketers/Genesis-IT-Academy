@@ -314,13 +314,14 @@ export default function Contact() {
             Join our Advanced <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-500">Coding course</span>
           </h2>
-          <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: "#0096C7" }}
-            whileTap={{ scale: 0.95 }}
-            className="px-12 py-6 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-[0.3em] text-xs shadow-xl shadow-brand-blue/20"
+          <a
+            href="https://wa.me/94760501061"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-12 py-6 bg-brand-blue text-white rounded-2xl font-black uppercase tracking-[0.3em] text-xs shadow-xl shadow-brand-blue/20 hover:scale-105 active:scale-95 transition-all"
           >
-            Apply Now
-          </motion.button>
+            Enroll Now
+          </a>
         </motion.div>
       </div>
     </div>
